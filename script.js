@@ -1,7 +1,7 @@
 class Calculator {
     constructor(previousOperandElement, currentOperandElement) {
-        this.previous = previousOperandElement;
-        this.current = currentOperandElement;
+        this.previousOperandElement = previousOperandElement;
+        this.currentOperandElement = currentOperandElement;
         this.clear();
     }
 
@@ -23,7 +23,7 @@ class Calculator {
 
     chooseOperation(operation){
         if (this.currentOperand === "") return;
-        if (this.previousOperand !== ""){
+        if (this.previousOperand !== "" && this.currentOperand !== ""){
             this.compute();
         }
         this.operation = operation;
@@ -33,10 +33,10 @@ class Calculator {
 
     compute(){
         let computationResult;
-        const previousCompute = this.previousOperand.includes(".") ? parseFloat(this.previousOperand)
-            : parseInt(this.previousOperand)
-        const currentCompute = this.currentOperand.includes(".") ? parseFloat(this.currentOperand)
-            : parseInt(this.currentOperand);
+        const previousCompute = this.previousOperand.toString().includes(".")
+            ? parseFloat(this.previousOperand.toString()) : parseInt(this.previousOperand.toString())
+        const currentCompute = this.currentOperand.toString().includes(".")
+            ? parseFloat(this.currentOperand.toString()) : parseInt(this.currentOperand.toString());
         if (isNaN(previousCompute) || isNaN(currentCompute)) return;
         switch (this.operation){
             case "+":
@@ -59,8 +59,11 @@ class Calculator {
     }
 
     updateDisplay(){
-        this.current.innerText = this.currentOperand;
-        this.previous.innerText = this.previousOperand;
+        this.currentOperandElement.innerText = this.currentOperand;
+        if (this.operation != null){
+            this.previousOperandElement.innerText = this.previousOperand +
+                " " + this.operation;
+        }
     }
 }
 
