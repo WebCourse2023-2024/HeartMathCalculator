@@ -49,7 +49,7 @@ class Calculator {
                 computationResult = previousCompute * currentCompute
                 break;
             case "÷":
-                computationResult = previousCompute / currentCompute
+                computationResult = (previousCompute / currentCompute).toFixed(10)
                 break;
             default: return;
         }
@@ -58,11 +58,31 @@ class Calculator {
         this.previousOperand = "";
     }
 
+    getDisplayNumber(number){
+        const stringNumber = number.toString();
+        const integerDigits = parseFloat(stringNumber.split(".")[0]);
+        const decimalDigits = stringNumber.split(".")[1];
+        let integerDisplay;
+        if(isNaN(integerDigits)){
+            integerDisplay = "";
+        } else {
+            integerDisplay = integerDigits.toLocaleString("en",
+                {maximumFractionDigits: 0});
+        }
+        if(decimalDigits != null){
+            return `${integerDisplay}.${decimalDigits}`
+        } else {
+            return integerDisplay;
+        }
+    }
+
     updateDisplay(){
-        this.currentOperandElement.innerText = this.currentOperand;
+        this.currentOperandElement.innerText = this.getDisplayNumber(this.currentOperand);
         if (this.operation != null){
-            this.previousOperandElement.innerText = this.previousOperand +
+            this.previousOperandElement.innerText = this.getDisplayNumber(this.previousOperand) +
                 " " + this.operation;
+        } else {
+            this.previousOperandElement.innerText = "";
         }
     }
 }
