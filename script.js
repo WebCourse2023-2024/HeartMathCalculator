@@ -21,7 +21,13 @@ class Calculator {
     }
 
     chooseOperation(operation){
-
+        if (this.currentOperand === "") return;
+        if (this.previousOperand !== ""){
+            this.compute();
+        }
+        this.operation = operation;
+        this.previousOperand = this.currentOperand;
+        this.currentOperand = "";
     }
 
     compute(){
@@ -30,6 +36,7 @@ class Calculator {
 
     updateDisplay(){
         this.current.innerText = this.currentOperand;
+        this.previous.innerText = this.previousOperand;
     }
 }
 
