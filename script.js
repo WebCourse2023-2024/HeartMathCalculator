@@ -90,3 +90,14 @@ equalsButton.addEventListener("click", () => {
    calculator.compute();
    calculator.updateDisplay();
 });
+
+allClearButton.addEventListener("click", () => {
+    calculator.clear();
+    calculator.updateDisplay();
+});
+
+deleteButton.addEventListener("click", () => {
+   calculator.delete();
+   calculator.updateDisplay();
+});
+
