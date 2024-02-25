@@ -1,3 +1,6 @@
 #Ignoring .idea/ directory
 .idea/
 
+#Ignoring notes.txt file
+notes.txt
+
