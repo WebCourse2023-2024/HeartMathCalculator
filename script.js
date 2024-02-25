@@ -25,11 +25,11 @@ class Calculator {
     }
 
     compute(){
+
     }
 
     updateDisplay(){
         this.current.innerText = this.currentOperand;
-        this.previous.innerText = this.previousOperand;
     }
 }
 
@@ -45,6 +45,13 @@ const calculator = new Calculator(previousOperandElement, currentOperandElement)
 numberButtons.forEach(button => {
     button.addEventListener("click", () => {
         calculator.appendNumber(button.innerText);
+        calculator.updateDisplay();
+    });
+});
+
+operationButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        calculator.chooseOperation(button.innerText);
         calculator.updateDisplay();
     });
 });
