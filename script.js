@@ -16,6 +16,7 @@ class Calculator {
     }
 
     appendNumber(number){
+        if(number === "." && this.currentOperand.includes(".")) return;
         this.currentOperand = this.currentOperand.toString() + number.toString();
     }
 
@@ -28,6 +29,7 @@ class Calculator {
 
     updateDisplay(){
         this.current.innerText = this.currentOperand;
+        this.previous.innerText = this.previousOperand;
     }
 }
 
